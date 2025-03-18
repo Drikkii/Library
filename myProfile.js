@@ -1,11 +1,11 @@
 // копирование в буфер card number
 
-let text = document.getElementById("copFn").innerHTML;
+let text = document.getElementById("copFn");
 const CopyFn = async () => {
   try {
-    await navigator.clipboard.writeText(text);
+    await navigator.clipboard.writeText(text.innerHTML);
     let tooltip = document.getElementById("myTooltip");
-    tooltip.innerHTML = "Copied: " + text;
+    tooltip.innerHTML = "Copied: " + text.innerHTML;
     console.log("Content copied to clipboard");
   } catch (err) {
     console.error("Failed to copy: ", err);
@@ -15,6 +15,8 @@ function outFunc() {
   var tooltip = document.getElementById("myTooltip");
   tooltip.innerHTML = "Copy to clipboard";
 }
+window.CopyFn = CopyFn;
+window.outFunc = outFunc;
 
 //крестик в myProfile
 
@@ -108,9 +110,11 @@ TwoMyProfile.addEventListener("click", function () {
 const nameClient = document.querySelector(".nameClient");
 const NameProfile = document.querySelector(".NameProfile");
 const inputTextInLog = document.querySelector(".input-text-inLog");
+const inputTextInLogNumber = document.querySelector(".input-text-inLog-number");
 
 window.addEventListener("load", () => {
   if (localStorage.getItem("InLogUser") == 1) {
+    inputTextInLogNumber.placeholder = localStorage.getItem("GenerateNumber");
     inputTextInLog.placeholder =
       localStorage.getItem("Name").charAt(0).toUpperCase() +
       localStorage.getItem("Name").slice(1) +
@@ -118,10 +122,9 @@ window.addEventListener("load", () => {
       localStorage.getItem("LastName").charAt(0).toUpperCase() +
       localStorage.getItem("LastName").slice(1);
     NameProfile.textContent =
-      localStorage.getItem("Name").charAt(0) +
-      localStorage.getItem("LastName").charAt(0);
+      localStorage.getItem("Name").charAt(0).toUpperCase() +
+      localStorage.getItem("LastName").charAt(0).toUpperCase();
     nameClient.textContent =
       localStorage.getItem("Name") + " " + localStorage.getItem("LastName");
   }
 });
-word.charAt(0).toUpperCase() + word.slice(1);

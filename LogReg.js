@@ -9,10 +9,14 @@ let closeBtn = document.querySelector(".close-btn"); // кнопка закри�
 let SignUpCard = document.querySelector(".sing-up");
 let LoginReg = document.querySelector(".log-inreg");
 let MyProfileBntLog = document.querySelector(".MyProfileBntLog");
-let ourCards = document.querySelector(".our-cards");
-let ourCardsInLog = document.querySelector(".our-cards-inLog");
+let ourCards = document.querySelector(".cards");
+let ourCardsInLog = document.querySelector(".cards-inLog");
 
 document.querySelector(".LogIn").addEventListener("submit", function (event) {
+  event.preventDefault();
+  window.location.href = window.location.pathname;
+});
+document.getElementById("RegForm").addEventListener("submit", function (event) {
   event.preventDefault();
   window.location.href = window.location.pathname;
 });
@@ -20,9 +24,9 @@ document.querySelector(".LogIn").addEventListener("submit", function (event) {
 window.addEventListener("load", () => {
   if (localStorage.getItem("InLogUser") == 1) {
     ourCards.style.display = "none";
-    ourCardsInLog.style.display = "block";
+    ourCardsInLog.style.display = "flex";
   } else {
-    ourCards.style.display = "block";
+    ourCards.style.display = "flex";
     ourCardsInLog.style.display = "none";
   }
 });
@@ -363,24 +367,7 @@ inputPASSWORD.addEventListener("keyup", function (evt) {
   else if (length >= 8) inputPASSWORD.style.borderColor = "green";
 });
 
-// const EMAIL_LOGEXP =
-//   /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 
-// const inputLogin = document.getElementById("Log-email");
-
-// function isEmailValid(value) {
-//   return EMAIL_LOGEXP.test(value);
-// }
-
-// function onInput() {
-//   if (isEmailValid(inputLogin.value)) {
-//     inputLogin.style.borderColor = "green";
-//   } else {
-//     inputLogin.style.borderColor = "red";
-//   }
-// }
-
-// inputLogin.addEventListener("input", onInput);
 
 // log in d Digital
 

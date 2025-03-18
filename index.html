@@ -230,17 +230,17 @@
               <div class="visits">
                 <p class="sized-name-profile">Visits</p>
                 <img src="img/Union.svg" alt="" />
-                <p class="NumberProfile">23</p>
+                <p class="ProfileVisite">23</p>
               </div>
               <div class="bonuses">
                 <p class="sized-name-profile">bonuses</p>
                 <img src="img/Star 1.svg" alt="" />
-                <p class="NumberProfile">1240</p>
+                <p class="ProfileBonuse">1240</p>
               </div>
               <div class="Books">
                 <p class="sized-name-profile">Books</p>
                 <img src="img/book.svg" alt="" />
-                <p class="NumberProfile">2</p>
+                <p class="ProfileBooks">2</p>
               </div>
             </div>
             <div class="ProfileRented">
@@ -252,7 +252,7 @@
             </div>
             <div class="card-number-profile">
               <span>Card number</span>
-              <span id="copFn" class="generated-Number">F00234030</span>
+              <span id="copFn" class="generated-Number"></span>
               <div class="tooltip">
                 <button
                   class="copybutton"
@@ -264,7 +264,6 @@
                   >
                   <img
                     id="copyClick"
-                    onclick="CopyFn()"
                     class="copyicon"
                     src="img/icon copy.svg"
                     alt="copy"
@@ -1045,12 +1044,6 @@
               </div>
             </div>
           </div>
-        </section>
-        <section class="our-cards-inLog" id="our-cards">
-          <div class="title">
-            <h2>Digital Library Cards</h2>
-            <div class="line"></div>
-          </div>
           <div class="cards-inLog">
             <div class="card-inLog">
               <span class="title-card-inLog">Your Library card</span>
@@ -1065,7 +1058,7 @@
                       oninput="if(/[^a-zA-Z,Яа-яЁё , -]/.test(this.value)){let Selection = this.selectionStart-1;this.value=this.value.replace(/[^a-zA-Z,Яа-яЁё , - ]/g,'');this.setSelectionRange(Selection, Selection);}"
                     />
                     <input
-                      class="input-text-inLog"
+                      class="input-text-inLog-number"
                       type="number"
                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                       placeholder="F00234030"
@@ -1074,17 +1067,17 @@
                       <div class="visits-inLog">
                         <p class="sized-name-profile-inLog">Visits</p>
                         <img src="img/Union.svg" alt="" />
-                        <p class="NumberProfile-inLog">23</p>
+                        <p class="Profile-inLog-Visite">23</p>
                       </div>
                       <div class="bonuses-inLog">
                         <p class="sized-name-profile-inLog">bonuses</p>
                         <img src="img/Star 1.svg" alt="" />
-                        <p class="NumberProfile-inLog">1240</p>
+                        <p class="Profile-inLog-Bonuse">1240</p>
                       </div>
                       <div class="Books-inLog">
                         <p class="sized-name-profile-inLog">Books</p>
                         <img src="img/book.svg" alt="" />
-                        <p class="NumberProfile-inLog">2</p>
+                        <p class="Profile-inLog-Books">2</p>
                       </div>
                     </div>
                   </form>
@@ -1158,14 +1151,11 @@
         </div>
       </div>
     </footer>
-    <script src="BurgerMenu.js"></script>
-    <script src="slider.js"></script>
-    <script src="books.js"></script>
-    <script src="LogReg.js"></script>
-    <script src="myProfile.js"></script>
-    <script src="Libcard.js"></script>
-    <!-- <script src="RegLocal.js"></script> -->
-    <script src="RegLocal1.js"></script>
-    <script src="js-alert.js"></script>
+    <script src="BurgerMenu.js " type="module"></script>
+    <script src="slider.js" type="module"></script>
+    <script src="books.js" type="module"></script>
+    <script src="LogReg.js" type="module"></script>
+    <script src="myProfile.js" type="module"></script>
+    <script src="RegLocal.js" type="module"></script>
   </body>
 </html>

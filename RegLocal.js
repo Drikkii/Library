@@ -1,138 +1,52 @@
-let submitBtn = document.getElementById("reg-sign-in");
-
-const usernameInput = document.getElementById("Reg-email");
+const submitBtn = document.getElementById("reg-sign-in");
+const usernameInput = document.getElementById("Reg-Firstname");
+const lastnameInput = document.getElementById("Reg-Lastname");
+const emailInput = document.getElementById("Reg-email");
 const passwordInput = document.getElementById("Reg-password");
+const logSignIn = document.getElementById("log-sign-in");
+const LogEmail = document.getElementById("Log-email");
+const LogPassword = document.getElementById("Log-password");
+const generatedNumber = document.querySelector(".generated-Number");
+const ProfileVisite = document.querySelector(".ProfileVisite");
+const ProfileinLogVisite = document.querySelector(".Profile-inLog-Visite");
 
-let users = JSON.parse(localStorage.getItem("usersArray"));
-localStorage.setItem("usersArray", JSON.stringify([]));
+function generateRandomString(sumString) {
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const numbers = "1234567890";
+  let randomString = "";
 
-console.log(users);
+  const firstCharIndex = Math.floor(Math.random() * letters.length);
+  randomString += letters[firstCharIndex];
 
-class NewUser {
-  constructor(login, pass) {
-    this.login = login;
-    this.pass = pass;
+  for (let i = 1; i < sumString; i++) {
+    const numberIndex = Math.floor(Math.random() * numbers.length);
+    randomString += numbers[numberIndex];
   }
-}
-// let emailRegexp = /[A-Za-z0-9.@]{5,30}/g;
-// let passRegexp = /[A-Za-z0-9.]{8,15}/g;
-
-function registerNewUser() {
-  // if (
-  //   emailRegexp.test(usernameInput.value) &&
-  //   passRegexp.test(passwordInput.value)
-  // ) {
-  users.push(
-    new NewUser(toRot13(usernameInput.value), toRot13(passwordInput.value))
-  );
-  localStorage.setItem("usersArray", JSON.stringify(users));
+  return randomString;
 }
 
-submitBtn.onclick = registerNewUser;
-
-const toRot13 = (message) => {
-  const originalAlpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const cipher = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
-  return message.replace(
-    /[a-z]/gi,
-    (letter) => cipher[originalAlpha.indexOf(letter)]
-  );
-};
-
-let form = document.getElementById("RegForm");
-let formFileds = form.elements;
-let submitBtn = document.getElementById("reg-sign-in");
-
-submitBtn.addEventListener("click", clearStorage);
-
-for (let i = 0; i < formFileds.length; i++) {
-  formFileds[i].addEventListener("change", changeHandler);
-}
-
-function clearStorage() {
-  localStorage.clear();
-}
-
-function changeHandler() {
-  if (this.type !== "checkbox") {
-    console.log(this.name, this.value);
-    localStorage.setItem(this.name, this.value);
-  } else {
-    console.log(this.name, this.checked);
-    localStorage.setItem(this.name, this.checked);
-  }
-}
-
-function checkStorage() {
-  for (let i = 0; i < formFileds.length; i++) {
-    if (formFileds[i].type !== "submit") {
-      if (formFileds[i].type === "checked") {
-        formFileds[i].checked = localStorage.getItem(formFileds[i].name);
-      } else {
-        formFileds[i].value = localStorage.getItem(formFileds[i].name);
-      }
-    }
-  }
-  attachEvents();
-}
-
-function attachEvents() {
-  for (let i = 0; i < formFileds.length; i++) {
-    formFileds[i].addEventListener("change", changeHandler);
-  }
-}
-
-checkStorage();
-
-// let form = document.getElementById("RegForm");
-// let formFileds = form.elements;
-// let submitBtn = document.getElementById("reg-sign-in");
-
-// for (let i = 0; i < formFileds.length; i++) {
-//   formFileds[i].addEventListener("change", changeHandler);
-// }
-
-// function clearStorage() {
-//   localStorage.clear();
-// }
-
-// function changeHandler() {
-//   if (this.type !== "checkbox") {
-//     console.log(this.name, this.value);
-//     localStorage.setItem(this.name, this.value);
-//   } else {
-//     console.log(this.name, this.checked);
-//     localStorage.setItem(this.name, this.checked);
-//   }
-// }
-
-// function checkStorage() {
-//   for (let i = 0; i < formFileds.length; i++) {
-//     if (formFileds[i].type !== "submit") {
-//       if (formFileds[i].type === "checked") {
-//         formFileds[i].checked = localStorage.getItem(formFileds[i].name);
-//       } else {
-//         formFileds[i].value = localStorage.getItem(formFileds[i].name);
-//       }
-//     }
-//   }
-//   attachEvents();
-// }
-
-// function attachEvents() {
-//   for (let i = 0; i < formFileds.length; i++) {
-//     formFileds[i].addEventListener("change", changeHandler);
-//   }
-// }
-// // сохраняем данные Local storage
-// checkStorage();
 submitBtn.addEventListener("click", function () {
-  let Name = localStorage.getItem("username");
-  let LastName = localStorage.getItem("lastname");
-  let Email = localStorage.getItem("email");
-  let Password = localStorage.getItem("password");
-  console.log(Name);
-  console.log(LastName);
-  console.log(Email);
-  console.log(Password);
+  localStorage.setItem("Name", usernameInput.value);
+  localStorage.setItem("LastName", lastnameInput.value);
+  localStorage.setItem("Email", emailInput.value);
+  localStorage.setItem("Password", passwordInput.value);
+  localStorage.setItem("GenerateNumber", generateRandomString(8));
+  localStorage.setItem("Visit", 0);
+  generatedNumber.textContent = generateRandomString(8);
+});
+
+logSignIn.addEventListener("click", function () {
+  if (
+    (LogEmail.value == localStorage.getItem("Email"),
+    LogPassword.value == localStorage.getItem("Password"))
+  ) {
+    localStorage.setItem("InLogUser", 1);
+    localStorage.setItem("Visit", Number(localStorage.getItem("Visit")) + 1);
+  }
+});
+
+window.addEventListener("load", () => {
+  generatedNumber.textContent = localStorage.getItem("GenerateNumber");
+  ProfileVisite.textContent = localStorage.getItem("Visit");
+  ProfileinLogVisite.textContent = localStorage.getItem("Visit");
 });

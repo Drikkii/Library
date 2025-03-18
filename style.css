@@ -1834,6 +1834,7 @@ input[type="radio"]:checked + label {
   letter-spacing: 0.6px;
 }
 .input-text-inLog,
+.input-text-inLog-number,
 .input-number-inLog {
   color: #bb945f;
   padding-left: 20px;
@@ -1846,6 +1847,7 @@ input[type="radio"]:checked + label {
   flex-shrink: 0;
 }
 .input-text-inLog,
+.input-text-inLog-number,
 .input-number-inLog:active {
   border: solid white;
   border-radius: 10px;
@@ -1855,6 +1857,7 @@ input[type="radio"]:checked + label {
   flex-shrink: 0;
 }
 .input-text-inLog,
+.input-text-inLog-number,
 .input-number-inLog::placeholder {
   color: #0c0707;
   font-family: Forum;
@@ -1868,6 +1871,10 @@ input[type="radio"]:checked + label {
 }
 
 input.input-text-inLog::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #bb945f;
+}
+input.input-text-inLog-number::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #bb945f;
 }
