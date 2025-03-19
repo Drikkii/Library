@@ -11,6 +11,9 @@ let LoginReg = document.querySelector(".log-inreg");
 let MyProfileBntLog = document.querySelector(".MyProfileBntLog");
 let ourCards = document.querySelector(".cards");
 let ourCardsInLog = document.querySelector(".cards-inLog");
+let ProfileBooks = document.querySelector(".ProfileBooks");
+let ProfileInLogBooks = document.querySelector(".Profile-inLog-Books");
+const bookList = document.querySelector(".Style-Profile-Ul");
 
 document.querySelector(".LogIn").addEventListener("submit", function (event) {
   event.preventDefault();
@@ -279,8 +282,35 @@ CardCrossTwo.addEventListener("click", function () {
   }
 });
 
+// buy button
+document.addEventListener("DOMContentLoaded", function () {
+  const purchasedBooks =
+    JSON.parse(localStorage.getItem("purchasedBooks")) || [];
+  purchasedBooks.forEach((book) => {
+    const li = document.createElement("li");
+    li.textContent = book;
+    bookList.appendChild(li);
+  });
+  buyButton.forEach((button) => {
+    const savedButtons =
+      JSON.parse(localStorage.getItem("disabledButtons")) || {};
+
+    const buttonId = button.getAttribute("data-id");
+    if (savedButtons[buttonId]) {
+      button.disabled = true;
+      button.classList.add("inactive-button");
+      button.classList.remove("active-button");
+      button.textContent = "Own";
+    }
+  });
+});
+
+let activeButton = null;
+
 buyButton.forEach((button) => {
   button.addEventListener("click", function () {
+    activeButton = this;
+
     if (localStorage.getItem("InLogUser") == 1) {
       if (Regbackground.classList.contains("hidden")) {
         Regbackground.classList.remove("hidden");
@@ -303,6 +333,48 @@ buyButton.forEach((button) => {
       }, 100);
     }
   });
+});
+
+buybook.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  if (activeButton) {
+    const bookContainer = activeButton.closest("div");
+    const bookTitle = bookContainer.querySelector(".book-name-up").textContent;
+    const bookAuthor =
+      bookContainer.querySelector(".book-name-down").textContent;
+    const fullBookName = `${bookTitle} ${bookAuthor}`;
+    const buttonId = activeButton.getAttribute("data-id");
+    let purchasedBooks =
+      JSON.parse(localStorage.getItem("purchasedBooks")) || [];
+    purchasedBooks.push(fullBookName);
+    localStorage.setItem("purchasedBooks", JSON.stringify(purchasedBooks));
+
+    const li = document.createElement("li");
+    li.textContent = fullBookName;
+    bookList.appendChild(li);
+    localStorage.setItem(
+      "BuyBooks",
+      Number(localStorage.getItem("BuyBooks")) + 1
+    );
+    ProfileInLogBooks.textContent = localStorage.getItem("BuyBooks");
+    ProfileBooks.textContent = localStorage.getItem("BuyBooks");
+    activeButton.disabled = true;
+    activeButton.classList.add("inactive-button");
+    activeButton.classList.remove("active-button");
+    activeButton.textContent = "Own";
+    const savedButtons =
+      JSON.parse(localStorage.getItem("disabledButtons")) || {};
+    savedButtons[buttonId] = true;
+    localStorage.setItem("disabledButtons", JSON.stringify(savedButtons));
+
+    buybook.classList.add("visual");
+    Regbackground.classList.add("visual");
+    setTimeout(function () {
+      buybook.classList.add("hidden");
+      Regbackground.classList.add("hidden");
+    }, 300);
+  }
 });
 
 logIn.addEventListener("click", function () {
@@ -366,8 +438,6 @@ inputPASSWORD.addEventListener("keyup", function (evt) {
   if (length < 8) inputPASSWORD.style.borderColor = "red";
   else if (length >= 8) inputPASSWORD.style.borderColor = "green";
 });
-
-
 
 // log in d Digital
 

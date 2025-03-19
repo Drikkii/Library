@@ -9,6 +9,7 @@ const LogPassword = document.getElementById("Log-password");
 const generatedNumber = document.querySelector(".generated-Number");
 const ProfileVisite = document.querySelector(".ProfileVisite");
 const ProfileinLogVisite = document.querySelector(".Profile-inLog-Visite");
+const logError = document.querySelector(".log-error");
 
 function generateRandomString(sumString) {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -32,16 +33,21 @@ submitBtn.addEventListener("click", function () {
   localStorage.setItem("Password", passwordInput.value);
   localStorage.setItem("GenerateNumber", generateRandomString(8));
   localStorage.setItem("Visit", 0);
+  localStorage.setItem("BuyBooks", 0);
   generatedNumber.textContent = generateRandomString(8);
 });
 
-logSignIn.addEventListener("click", function () {
+logSignIn.addEventListener("click", function (event) {
   if (
-    (LogEmail.value == localStorage.getItem("Email"),
-    LogPassword.value == localStorage.getItem("Password"))
+    LogEmail.value == localStorage.getItem("Email") &&
+    LogPassword.value == localStorage.getItem("Password")
   ) {
     localStorage.setItem("InLogUser", 1);
     localStorage.setItem("Visit", Number(localStorage.getItem("Visit")) + 1);
+    logError.style.display = "none";
+  } else {
+    event.preventDefault();
+    logError.style.display = "block";
   }
 });
 

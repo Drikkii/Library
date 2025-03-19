@@ -172,11 +172,12 @@
               ><input
                 id="Log-password"
                 class="input-log-inf"
-                type="text"
+                type="password"
                 minlength="8"
                 placeholder="Enter your password"
               />
             </div>
+            <p class="log-error">Ошибка: Неверный email или пароль!</p>
             <button id="log-sign-in" type="submit" class="reg-sing">
               Sign Up
             </button>
@@ -243,12 +244,11 @@
                 <p class="ProfileBooks">2</p>
               </div>
             </div>
-            <div class="ProfileRented">
+            <div class="rentedbook">
               <p class="Tittle-Rented">Rented books</p>
-              <ul class="Style-Profile-Ul">
-                <li>The Last Queen, Clive Irving</li>
-                <li>Dominicana, Angie Cruz</li>
-              </ul>
+              <div class="ProfileRented">
+                <ul class="Style-Profile-Ul"></ul>
+              </div>
             </div>
             <div class="card-number-profile">
               <span>Card number</span>
@@ -338,7 +338,7 @@
           </div>
         </section>
         <section class="Favorites" id="Favorites">
-          <div id="buybook" class="buybook visual hidden">
+          <form id="buybook" class="buybook visual hidden">
             <div class="namebuybook">
               <span class="namebuytittle">Buy a library card</span>
               <div class="close-MyBuycard">
@@ -354,7 +354,11 @@
                   id="bankCard"
                   class="input-bank-card"
                   type="text"
+                  pattern="\d{16}"
+                  maxlength="16"
+                  placeholder="Введите 16 цифр карты"
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                  required
                 />
                 <label id="LbankCard" class="Reg-name" for="bankCardTimeM"
                   >Expiration code</label
@@ -365,14 +369,18 @@
                     class="input-bank-card"
                     type="text"
                     maxlength="2"
+                    pattern="\d{2}"
                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    required
                   />
                   <input
                     id="bankCardTimeY"
                     class="input-bank-card"
                     type="text"
                     maxlength="2"
+                    pattern="\d{2}"
                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    required
                   />
                 </div>
                 <label id="LbankCardCVC" class="Reg-name" for="bankCardCVC"
@@ -381,8 +389,10 @@
                   id="bankCardCVC"
                   class="input-bank-card"
                   type="text"
+                  pattern="\d{3}"
                   maxlength="3"
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                  required
                 />
                 <label id="LCardholder" class="Reg-name" for="Cardholder"
                   >Cardholder name</label
@@ -391,10 +401,17 @@
                   class="input-bank-card"
                   type="text"
                   oninput="if(/[^a-zA-Z,Яа-яЁё , -]/.test(this.value)){let Selection = this.selectionStart-1;this.value=this.value.replace(/[^a-zA-Z,Яа-яЁё , - ]/g,'');this.setSelectionRange(Selection, Selection);}"
+                  required
                 />
                 <label id="LPostal-code" class="Reg-name" for="Postal-code"
                   >Postal code</label
-                ><input id="Postal-code" class="input-bank-card" type="text" />
+                ><input
+                  id="Postal-code"
+                  class="input-bank-card"
+                  type="text"
+                  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                  required
+                />
                 <label id="LCityCard" class="Reg-name" for="CityCard"
                   >City / Town</label
                 ><input
@@ -402,9 +419,10 @@
                   class="input-bank-card"
                   type="text"
                   oninput="if(/[^a-zA-Z,Яа-яЁё , -]/.test(this.value)){let Selection = this.selectionStart-1;this.value=this.value.replace(/[^a-zA-Z,Яа-яЁё , - ]/g,'');this.setSelectionRange(Selection, Selection);}"
+                  required
                 />
                 <div class="button-Buy-Book">
-                  <button class="Buy-Book-button">Buy</button>
+                  <button type="submit" class="Buy-Book-button">Buy</button>
                   <span class="price-book">$ 25.00</span>
                 </div>
               </div>
@@ -415,7 +433,7 @@
                 this form to apply for a temporary card.
               </div>
             </div>
-          </div>
+          </form>
 
           <div class="title">
             <h2>Favorites</h2>
@@ -488,8 +506,8 @@
           <div class="allBook">
             <div id="winter" class="favorites-items-winter">
               <div class="first-book">
-                <button type="button" class="active-button">
-                  <span class="button-name-active">Buy</span>
+                <button type="button" class="active-button" data-id="1">
+                  Buy
                 </button>
 
                 <img class="book-position" src="img/book1.png" alt="book1" />
@@ -509,8 +527,8 @@
                 </div>
               </div>
               <div class="second-book">
-                <button type="button" class="active-button">
-                  <span class="button-name-active">Buy</span>
+                <button type="button" class="active-button" data-id="2">
+                  Buy
                 </button>
                 <img class="book-position" src="img/book2.png" alt="book2" />
                 <div class="Staff-Picks">
@@ -528,8 +546,8 @@
                 </div>
               </div>
               <div class="third-book">
-                <button type="button" class="active-button">
-                  <span class="button-name-active">Buy</span>
+                <button type="button" class="active-button" data-id="3">
+                  Buy
                 </button>
                 <img class="book-position" src="img/book3.png" alt="book3" />
                 <div class="Staff-Picks">
@@ -550,8 +568,8 @@
                 </div>
               </div>
               <div class="fourth-book">
-                <button type="button" class="inactive-button" disabled>
-                  <span class="button-name-inactive">Own</span>
+                <button type="button" class="active-button" data-id="4">
+                  Buy
                 </button>
                 <img class="book-position" src="img/book4.png" alt="book4" />
                 <div class="Staff-Picks">
@@ -570,8 +588,8 @@
             </div>
             <div id="spring" class="favorites-items-spring hidden visual">
               <div class="first-book">
-                <button type="button" class="active-button">
-                  <span class="button-name-active">Buy</span>
+                <button type="button" class="active-button" data-id="5">
+                  Buy
                 </button>
                 <img
                   class="book-position"
@@ -592,8 +610,8 @@
                 </div>
               </div>
               <div class="second-book">
-                <button type="button" class="active-button">
-                  <span class="button-name-active">Buy</span>
+                <button type="button" class="active-button" data-id="6">
+                  Buy
                 </button>
                 <img
                   class="book-position"
@@ -616,8 +634,8 @@
                 </div>
               </div>
               <div class="third-book">
-                <button type="button" class="active-button">
-                  <span class="button-name-active">Buy</span>
+                <button type="button" class="active-button" data-id="7">
+                  Buy
                 </button>
                 <img
                   class="book-position"
@@ -638,8 +656,8 @@
                 </div>
               </div>
               <div class="fourth-book">
-                <button type="button" class="inactive-button" disabled>
-                  <span class="button-name-inactive">Own</span>
+                <button type="button" class="active-button" data-id="8">
+                  Buy
                 </button>
                 <img
                   class="book-position"
@@ -663,8 +681,8 @@
             </div>
             <div id="summer" class="favorites-items-summer hidden visual">
               <div class="first-book">
-                <button type="button" class="active-button">
-                  <span class="button-name-active">Buy</span>
+                <button type="button" class="active-button" data-id="9">
+                  Buy
                 </button>
                 <img
                   class="book-position"
@@ -688,8 +706,8 @@
                 </div>
               </div>
               <div class="second-book">
-                <button type="button" class="active-button">
-                  <span class="button-name-active">Buy</span>
+                <button type="button" class="active-button" data-id="10">
+                  Buy
                 </button>
                 <img
                   class="book-position"
@@ -712,8 +730,8 @@
                 </div>
               </div>
               <div class="third-book">
-                <button type="button" class="active-button">
-                  <span class="button-name-active">Buy</span>
+                <button type="button" class="active-button" data-id="11">
+                  Buy
                 </button>
                 <img
                   class="book-position"
@@ -735,7 +753,9 @@
                 </div>
               </div>
               <div class="fourth-book">
-                <button class="active-button">Buy</button>
+                <button type="button" class="active-button" data-id="12">
+                  Buy
+                </button>
 
                 <img
                   class="book-position"
@@ -759,8 +779,8 @@
             </div>
             <div id="autumn" class="favorites-items-autumn hidden visual">
               <div class="first-book">
-                <button type="button" class="active-button">
-                  <span class="button-name-active">Buy</span>
+                <button type="button" class="active-button" data-id="13">
+                  Buy
                 </button>
                 <img
                   class="book-position"
@@ -783,8 +803,8 @@
                 </div>
               </div>
               <div class="second-book">
-                <button type="button" class="active-button">
-                  <span class="button-name-active">Buy</span>
+                <button type="button" class="active-button" data-id="14">
+                  Buy
                 </button>
                 <img
                   class="book-position"
@@ -806,8 +826,8 @@
                 </div>
               </div>
               <div class="third-book">
-                <button type="button" class="active-button">
-                  <span class="button-name-active">Buy</span>
+                <button type="button" class="active-button" data-id="15">
+                  Buy
                 </button>
                 <img
                   class="book-position"
@@ -830,7 +850,9 @@
                 </div>
               </div>
               <div class="fourth-book">
-                <button class="active-button">Buy</button>
+                <button type="button" class="active-button" data-id="16">
+                  Buy
+                </button>
 
                 <img
                   class="book-position"

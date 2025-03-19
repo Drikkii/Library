@@ -111,9 +111,13 @@ const nameClient = document.querySelector(".nameClient");
 const NameProfile = document.querySelector(".NameProfile");
 const inputTextInLog = document.querySelector(".input-text-inLog");
 const inputTextInLogNumber = document.querySelector(".input-text-inLog-number");
+const ProfileBooks = document.querySelector(".ProfileBooks");
+const ProfileInLogBooks = document.querySelector(".Profile-inLog-Books");
 
 window.addEventListener("load", () => {
   if (localStorage.getItem("InLogUser") == 1) {
+    ProfileBooks.textContent = localStorage.getItem("BuyBooks");
+    ProfileInLogBooks.textContent = localStorage.getItem("BuyBooks");
     inputTextInLogNumber.placeholder = localStorage.getItem("GenerateNumber");
     inputTextInLog.placeholder =
       localStorage.getItem("Name").charAt(0).toUpperCase() +

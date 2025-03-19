@@ -546,13 +546,20 @@ h1 {
 
 .ProfileRented {
   text-align: left;
-  margin: 0 0 40px 20px;
+  margin: 0 0 0 7px;
   height: 100px;
-
+  overflow-x: auto;
   background: #fff;
 }
+.rentedbook {
+  margin: 0 0 0 20px;
+  text-align: left;
+  height: 160px;
+  background: #fff;
+}
+
 .Tittle-Rented {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   color: #0c0c0e;
   font-family: Inter;
   font-size: 25px;
@@ -1330,6 +1337,14 @@ input[type="radio"]:checked + label {
   text-transform: capitalize;
 }
 .active-button {
+  color: #0c0c0e;
+  text-align: center;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
   cursor: pointer;
   margin: 510px 455px 15px 20px;
   position: absolute;
@@ -1351,6 +1366,14 @@ input[type="radio"]:checked + label {
   background: #bb945f;
 }
 .inactive-button {
+  color: #bb945f;
+  text-align: center;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
   cursor: default;
   color: #bb945f;
   margin: 510px 455px 15px 20px;
@@ -1361,6 +1384,14 @@ input[type="radio"]:checked + label {
   height: 30px;
   border-radius: 2px;
   border: 1px solid #bb945f;
+}
+.log-error {
+  left: 1.5rem;
+  top: 10.5rem;
+  font-size: 0.8rem;
+  position: absolute;
+  display: none;
+  color: red;
 }
 .button-name-active {
   color: #0c0c0e;
