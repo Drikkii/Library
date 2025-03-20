@@ -284,25 +284,27 @@ CardCrossTwo.addEventListener("click", function () {
 
 // buy button
 document.addEventListener("DOMContentLoaded", function () {
-  const purchasedBooks =
-    JSON.parse(localStorage.getItem("purchasedBooks")) || [];
-  purchasedBooks.forEach((book) => {
-    const li = document.createElement("li");
-    li.textContent = book;
-    bookList.appendChild(li);
-  });
-  buyButton.forEach((button) => {
-    const savedButtons =
-      JSON.parse(localStorage.getItem("disabledButtons")) || {};
+  if (localStorage.getItem("InLogUser") == 1) {
+    const purchasedBooks =
+      JSON.parse(localStorage.getItem("purchasedBooks")) || [];
+    purchasedBooks.forEach((book) => {
+      const li = document.createElement("li");
+      li.textContent = book;
+      bookList.appendChild(li);
+    });
+    buyButton.forEach((button) => {
+      const savedButtons =
+        JSON.parse(localStorage.getItem("disabledButtons")) || {};
 
-    const buttonId = button.getAttribute("data-id");
-    if (savedButtons[buttonId]) {
-      button.disabled = true;
-      button.classList.add("inactive-button");
-      button.classList.remove("active-button");
-      button.textContent = "Own";
-    }
-  });
+      const buttonId = button.getAttribute("data-id");
+      if (savedButtons[buttonId]) {
+        button.disabled = true;
+        button.classList.add("inactive-button");
+        button.classList.remove("active-button");
+        button.textContent = "Own";
+      }
+    });
+  }
 });
 
 let activeButton = null;
